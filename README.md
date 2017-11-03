@@ -8,6 +8,7 @@ This is a simple DDNS client for Route 53.
 - AWS Account
 - Hosted Zone on the AWS account
 - IAM user with programmatic access to modify the hosted zone
+- Note: **_aws cli is not strictly required_**
 
 ## Information Required:
 
@@ -20,7 +21,7 @@ You will need 4 pieces of information:
 ## Installation
 - Install and place route53ddns.exe and conf.toml side by side in a directory
 - Run `route53ddns.exe --configure` 
-- Give it the information you needed.
+- Give it the information referenced in the `information required` section.
 
 ## Running
 - Simply run `route53ddns.exe`
