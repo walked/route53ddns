@@ -19,7 +19,7 @@ You will need 4 pieces of information:
 - The desired FQDN e.g. `test.test.tld`
 
 ## Installation
-- Install and place route53ddns.exe and conf.toml side by side in a directory
+- Extract and place route53ddns.exe and conf.toml side by side in a directory
 - Run `route53ddns.exe --configure` 
 - Give it the information referenced in the `information required` section.
 
