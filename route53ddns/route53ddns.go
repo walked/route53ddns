@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
+	"time"
 
 	"github.com/BurntSushi/toml"
 )
@@ -24,7 +26,13 @@ func main() {
 	flag.Parse()
 	//Parse config file to Config struct
 	//conf.toml should live in the same directory as the compiled exe
-	c, err := ioutil.ReadFile("conf.toml")
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exePath := filepath.Dir(ex)
+
+	c, err := ioutil.ReadFile(exePath + "/conf.toml")
 	if err != nil {
 		fmt.Println("Error Reading Config")
 		os.Exit(1)
@@ -47,7 +55,24 @@ func main() {
 		os.Exit(0)
 	}
 
-	ip, err := checkIP()
-	createRecord(conf, ip)
+	currentIP, err := checkIP()
+	createRecord(conf, currentIP)
+	var ip string
+
+	for {
+		ip, err = checkIP()
+		if currentIP != ip {
+			createRecord(conf, ip)
+			currentIP = ip
+			fmt.Println("Updated IP")
+
+		} else {
+			fmt.Println("No update")
+		}
+		if err != nil {
+			fmt.Println(err)
+		}
+		time.Sleep(15 * time.Second)
+	}
 
 }
