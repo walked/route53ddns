@@ -14,7 +14,7 @@ import (
 	"github.com/kardianos/service"
 )
 
-//Config is simply for defining the configuration of the download for utilization within datimsync
+//Config is simply for defining the configuration the access / service info
 type Config struct {
 	ZoneID    string
 	Record    string
@@ -22,6 +22,7 @@ type Config struct {
 	SecretKey string
 }
 
+// Service Stuff
 var logger service.Logger
 
 type program struct{}
@@ -29,7 +30,6 @@ type program struct{}
 var stopControl bool
 
 func (p *program) Start(s service.Service) error {
-	// Start should not block. Do the actual work async.
 	stopControl = false
 	go p.run()
 	return nil
@@ -101,9 +101,9 @@ func (p *program) Stop(s service.Service) error {
 func main() {
 
 	svcConfig := &service.Config{
-		Name:        "GoServiceExampleSimple",
-		DisplayName: "Go Service Example",
-		Description: "This is an example Go service.",
+		Name:        "Route53DDNS",
+		DisplayName: "Route53DDNS",
+		Description: "Service for the Purpose of Performing DDNS to Route53",
 	}
 
 	prg := &program{}
