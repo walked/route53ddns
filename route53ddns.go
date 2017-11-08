@@ -46,8 +46,8 @@ func (p *program) run() {
 	for {
 		ip, err = checkIP()
 		if currentIP != ip {
-			createRecord(Configuration, ip)
 			currentIP = ip
+			createRecord(Configuration, currentIP)
 			fmt.Println("Updated IP")
 
 		} else {
@@ -139,7 +139,9 @@ func main() {
 
 	//s.Install() to install
 	//s.Uninstall() to uninstall
-	err = s.Run()
+	//err = s.Run()
+	currentIP, err := checkIP()
+	createRecord(Configuration, currentIP)
 	if err != nil {
 		logger.Error(err)
 	}
