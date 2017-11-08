@@ -59,7 +59,7 @@ func (p *program) run() {
 		if stopControl == true {
 			break
 		}
-		time.Sleep(15 * time.Second)
+		time.Sleep(15 * time.Minute)
 	}
 	// Do work here
 }
